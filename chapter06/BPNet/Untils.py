@@ -18,25 +18,25 @@ def loadDataSet(fileName):
         labelMat.append(int(lineArr[2]))
     return dataMat,labelMat
 
-# Êı¾İ±ê×¼»¯(¹éÒ»»¯):Í³¼Æ¾ùÖµºÍ±ê×¼²î¹éÒ»»¯
+# æ•°æ®æ ‡å‡†åŒ–(å½’ä¸€åŒ–):ç»Ÿè®¡å‡å€¼å’Œæ ‡å‡†å·®å½’ä¸€åŒ–
 def normalize(dataMat):
-    # ¼ÆËã¾ùÖµ
+    # è®¡ç®—å‡å€¼
     height = mean(dataMat[:,1])
     weight = mean(dataMat[:,2])	 
-    # ¼ÆËã¾ù·½²î
+    # è®¡ç®—å‡æ–¹å·®
     stdh = std(dataMat[:,1])
     stdw = std(dataMat[:,2])
-    # ±ê×¼»¯
+    # æ ‡å‡†åŒ–
     dataMat[:,1] = (dataMat[:,1]-height)/stdh
     dataMat[:,2] = (dataMat[:,2]-weight)/stdw	 
     return dataMat	 
 
-# ÏÔÊ¾»æÖÆÍ¼ĞÎ
+# æ˜¾ç¤ºç»˜åˆ¶å›¾å½¢
 def displayplot():
     plt.show()	
     
-# »æÖÆ¶şÎ¬Êı¾İ¼¯×ø±êÉ¢µãÍ¼:ÎŞ·ÖÀà
-# ÊÊÓÃÓÚ List ºÍ Matrix
+# ç»˜åˆ¶äºŒç»´æ•°æ®é›†åæ ‡æ•£ç‚¹å›¾:æ— åˆ†ç±»
+# é€‚ç”¨äº List å’Œ Matrix
 def drawScatter(dataMat,flag=True):
     if type(dataMat) is list :
     	px = (mat(dataMat)[:,1]).tolist()
@@ -48,10 +48,10 @@ def drawScatter(dataMat,flag=True):
     if flag : displayplot();
 
     
-# »æÖÆ¶şÎ¬Êı¾İ¼¯×ø±êÉ¢µãÍ¼:ÓĞ·ÖÀà
-# ÊÊÓÃÓÚ List ºÍ Matrix
+# ç»˜åˆ¶äºŒç»´æ•°æ®é›†åæ ‡æ•£ç‚¹å›¾:æœ‰åˆ†ç±»
+# é€‚ç”¨äº List å’Œ Matrix
 def drawClassScatter(dataMat,classLabels,flag=True):
-    # »æÖÆlist
+    # ç»˜åˆ¶list
     if type(dataMat) is list :
     	i = 0
     	for mydata in dataMat:
@@ -60,7 +60,7 @@ def drawClassScatter(dataMat,classLabels,flag=True):
     		else:
     			plt.scatter(mydata[1],mydata[2],c='red',marker='s')	
     		i +=1;
-    # »æÖÆMatrix	
+    # ç»˜åˆ¶Matrix	
     if type(dataMat) is matrix :
     	i = 0
     	for mydata in dataMat:
@@ -71,22 +71,22 @@ def drawClassScatter(dataMat,classLabels,flag=True):
     		i +=1;    	    
     if flag : displayplot();
 
-# »æÖÆ·ÖÀàÏß
+# ç»˜åˆ¶åˆ†ç±»çº¿
 def ClassifyLine(begin,end,weights,flag=True):
-	# È·¶¨³õÊ¼ÖµºÍÖÕÖ¹Öµ,¾«¶È	
+	# ç¡®å®šåˆå§‹å€¼å’Œç»ˆæ­¢å€¼,ç²¾åº¦	
 	X = linspace(begin,end,(end-begin)*100)
-	# ½¨Á¢ÏßĞÔ·ÖÀà·½²î
+	# å»ºç«‹çº¿æ€§åˆ†ç±»æ–¹å·®
 	Y = -(float(weights[0])+float(weights[1])*X)/float(weights[2]) 
 	plt.plot(X,Y,'b')
 	if flag : displayplot()
 
-# »æÖÆÇ÷ÊÆÏß: ¿Éµ÷ÕûÑÕÉ«		
+# ç»˜åˆ¶è¶‹åŠ¿çº¿: å¯è°ƒæ•´é¢œè‰²		
 def TrendLine(X,Y,color='r',flag=True):
 	plt.plot(X,Y,color)
 	if flag : displayplot()
 		
-# ºÏ²¢Á½¸ö¶àÎ¬µÄMatrix£¬²¢·µ»ØºÏ²¢ºóµÄMatrix
-# ÊäÈë²ÎÊıÓĞÏÈºóË³Ğò    
+# åˆå¹¶ä¸¤ä¸ªå¤šç»´çš„Matrixï¼Œå¹¶è¿”å›åˆå¹¶åçš„Matrix
+# è¾“å…¥å‚æ•°æœ‰å…ˆåé¡ºåº    
 def mergMatrix(matrix1,matrix2):
     [m1,n1] = shape(matrix1)
     [m2,n2] = shape(matrix2)
@@ -98,7 +98,7 @@ def mergMatrix(matrix1,matrix2):
     mergMat[:,n1:(n1+n2)] = matrix2[:,0:n2]
     return mergMat 	
 
-# »æÖÆµÈ¸ßÏß
+# ç»˜åˆ¶ç­‰é«˜çº¿
 def classfyContour(x,y,z,level=8,flag=True):
     plt.contour(x, x, z,1,colors='black')
     if flag : displayplot() 	
